@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- SEO Meta Tags -->
+  <title>ProCalc Master | Multi-Calculator Suite: Scientific, Financial, IBM & more</title>
+  <meta name="description" content="ProCalc Master – the ultimate multi-calculator hub. Access Scientific, IBM, Financial, Engineering, and everyday calculators in one professional tool." />
+  <link rel="canonical" href="https://procalcmaster.example.com" />
+  <!-- Google Font & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f2f5f9;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+    }
+
+    .app-container {
+      max-width: 1400px;
+      width: 100%;
+      background: white;
+      border-radius: 40px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+      padding: 2rem 2rem 0 2rem;
+      transition: all 0.2s ease;
+    }
+
+    /* ===== HEADER ===== */
+    .brand-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #e9edf4;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      background: linear-gradient(145deg, #1e2b3c, #0f172a);
+      color: white;
+      width: 48px;
+      height: 48px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      box-shadow: 0 8px 14px -6px rgba(15, 23, 42, 0.25);
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #0b1a2e, #1f3a5f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo-text span {
+      font-weight: 400;
+      -webkit-text-fill-color: #4b6589;
+      background: none;
+    }
+
+    .tagline {
+      color: #2c3e50;
+      background: #eef3fa;
+      padding: 0.4rem 1.2rem;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    /* ===== CALCULATOR NAV ===== */
+    .calc-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.2rem;
+      margin: 2rem 0 1.5rem 0;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid #e9edf4;
+    }
+
+    .calc-nav-btn {
+      background: transparent;
+      border: none;
+      padding: 0.6rem 1.4rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #2c4a6a;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid transparent;
+    }
+
+    .calc-nav-btn i {
+      font-size: 1.1rem;
+      color: #3b5f81;
+    }
+
+    .calc-nav-btn:hover {
+      background: #e8eff9;
+      border-color: #c3d7ed;
+    }
+
+    .calc-nav-btn.active {
+      background: #1d3a5c;
+      color: white;
+      box-shadow: 0 6px 12px -6px rgba(20, 50, 90, 0.25);
+      border-color: #1a3452;
+    }
+
+    .calc-nav-btn.active i {
+      color: white;
+    }
+
+    /* ===== MAIN GRID ===== */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 2.5rem;
+      margin: 1.5rem 0 3rem 0;
+    }
+
+    @media (max-width: 900px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    /* ===== CALCULATOR CARD ===== */
+    .calc-card {
+      background: #ffffff;
+      border-radius: 32px;
+      padding: 2rem 1.8rem;
+      box-shadow: 0 8px 28px -8px rgba(0, 20, 40, 0.08);
+      border: 1px solid #eef2f8;
+      transition: all 0.2s;
+    }
+
+    .calc-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 1.8rem;
+    }
+
+    .calc-header i {
+      font-size: 28px;
+      color: #1d3a5c;
+      background: #e6edf8;
+      padding: 12px;
+      border-radius: 18px;
+    }
+
+    .calc-header h2 {
+      font-weight: 600;
+      font-size: 1.8rem;
+      color: #0b1d2f;
+      letter-spacing: -0.3px;
+    }
+
+    .calc-header small {
+      font-weight: 400;
+      color: #4f6f8f;
+      font-size: 0.9rem;
+      margin-left: 6px;
+    }
+
+    .display {
+      background: #f0f5fe;
+      border-radius: 28px;
+      padding: 1.2rem 1.8rem;
+      margin-bottom: 2rem;
+      text-align: right;
+      border: 1px solid #dce5f0;
+      transition: 0.1s;
+      min-height: 100px;
+    }
+
+    .display .expression {
+      font-size: 1.2rem;
+      color: #3b5a78;
+      min-height: 2rem;
+      word-break: break-all;
+      font-weight: 400;
+      letter-spacing: 0.2px;
+    }
+
+    .display .result {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #0b1f33;
+      line-height: 1.2;
+      margin-top: 6px;
+      letter-spacing: -0.5px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .btn {
+      background: #f8faff;
+      border: none;
+      border-radius: 20px;
+      padding: 1rem 0.5rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #152b40;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02);
+      transition: all 0.1s ease;
+      cursor: pointer;
+      border: 1px solid #eef3fc;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .btn:active {
+      transform: scale(0.94);
+      background: #e4edfc;
+    }
+
+    .btn-operator {
+      background: #1d3a5c;
+      color: white;
+      border-color: #1a3452;
+      box-shadow: 0 6px 0 #10273e;
+    }
+
+    .btn-operator:active {
+      background: #143049;
+      transform: scale(0.94);
+    }
+
+    .btn-equal {
+      background: #0f2b47;
+      color: white;
+      border-color: #0b1f33;
+      box-shadow: 0 6px 0 #071625;
+    }
+
+    .btn-equal:active {
+      background: #091f36;
+      transform: scale(0.94);
+    }
+
+    .btn-clear {
+      background: #f2eefb;
+      color: #3d2c6b;
+    }
+
+    .btn-clear:active {
+      background: #e3daf5;
+    }
+
+    .btn-zero {
+      grid-column: span 2;
+    }
+
+    /* scientific extra buttons */
+    .btn-sci {
+      background: #eaf1fc;
+      color: #1d3a5c;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .btn-sci:active {
+      background: #d4e2f7;
+    }
+
+    /* ===== BLOG SECTION ===== */
+    .blog-section {
+      background: #f9fcff;
+      border-radius: 32px;
+      padding: 1.8rem 1.5rem;
+      border: 1px solid #e9f0f8;
+    }
+
+    .blog-section h3 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #0f263b;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.3px;
+    }
+
+    .blog-section h3 i {
+      color: #1e3f62;
+      background: #e0ecfc;
+      padding: 8px 12px;
+      border-radius: 40px;
+      font-size: 1.2rem;
+    }
+
+    .blog-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-height: 420px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .blog-list::-webkit-scrollbar {
+      width: 4px;
+    }
+    .blog-list::-webkit-scrollbar-track {
+      background: #e1eaf3;
+      border-radius: 10px;
+    }
+    .blog-list::-webkit-scrollbar-thumb {
+      background: #1d3a5c;
+      border-radius: 10px;
+    }
+
+    .blog-item {
+      background: white;
+      padding: 1rem 1.2rem;
+      border-radius: 24px;
+      border-left: 5px solid #1f3f64;
+      box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.02);
+      transition: 0.1s ease;
+      border: 1px solid #e2ecf9;
+      border-left-width: 6px;
+    }
+
+    .blog-item:hover {
+      background: #f5faff;
+      border-color: #b6ceea;
+    }
+
+    .blog-item .blog-title {
+      font-weight: 600;
+      color: #0f263b;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1rem;
+    }
+
+    .blog-item .blog-title i {
+      color: #2b4f77;
+      font-size: 0.9rem;
+      width: 20px;
+    }
+
+    .blog-item .blog-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: #4d6d8e;
+      align-items: center;
+    }
+
+    .blog-tag {
+      background: #e4eefa;
+      padding: 3px 12px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #1e4063;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      margin-top: 3rem;
+      padding: 1.8rem 0 1.2rem 0;
+      border-top: 1px solid #e4ecf6;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .footer-copy {
+      color: #345072;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: #2d4b6a;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: 0.1s;
+      border-bottom: 2px solid transparent;
+    }
+
+    .footer-links a:hover {
+      color: #0b1f33;
+      border-bottom-color: #1d3a5c;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .social-icons a {
+      color: #3b5f81;
+      font-size: 1.2rem;
+      transition: 0.1s;
+    }
+
+    .social-icons a:hover {
+      color: #102a41;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      .app-container {
+        padding: 1rem 1rem 0 1rem;
+      }
+      .brand-header {
+        flex-direction: column;
+        align-items: start;
+        gap: 0.8rem;
+      }
+      .logo-text {
+        font-size: 1.6rem;
+      }
+      .buttons {
+        gap: 10px;
+      }
+      .btn {
+        font-size: 1.1rem;
+        padding: 0.9rem 0.3rem;
+      }
+      .display .result {
+        font-size: 2.2rem;
+      }
+      .footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+      }
+      .footer-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .blog-section h3 {
+        font-size: 1.3rem;
+      }
+      .calc-header h2 {
+        font-size: 1.4rem;
+      }
+      .calc-nav {
+        gap: 0.5rem;
+      }
+      .calc-nav-btn {
+        padding: 0.4rem 1rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .btn {
+        font-size: 1rem;
+        border-radius: 16px;
+        padding: 0.8rem 0.2rem;
+      }
+      .calc-card {
+        padding: 1.2rem;
+      }
+      .calc-nav-btn {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.8rem;
+      }
+    }
+
+    /* utility */
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+<div class="app-container">
+
+  <!-- Header -->
+  <header class="brand-header">
+    <div class="logo-area">
+      <div class="logo-icon"><i class="fas fa-calculator"></i></div>
+      <div class="logo-text">ProCalc<span>Master</span></div>
+    </div>
+    <div class="tagline"><i class="fas fa-bolt" style="margin-right: 6px;"></i> multi‑calc · precision · insight</div>
+  </header>
+
+  <!-- Calculator Navigation -->
+  <nav class="calc-nav" id="calcNav">
+    <button class="calc-nav-btn active" data-calc="standard"><i class="fas fa-calculator"></i> Standard</button>
+    <button class="calc-nav-btn" data-calc="scientific"><i class="fas fa-flask"></i> Scientific</button>
+    <button class="calc-nav-btn" data-calc="ibm"><i class="fas fa-database"></i> IBM‑Style</button>
+    <button class="calc-nav-btn" data-calc="financial"><i class="fas fa-coins"></i> Financial</button>
+    <button class="calc-nav-btn" data-calc="engineering"><i class="fas fa-microchip"></i> Engineering</button>
+  </nav>
+
+  <!-- Main Grid -->
+  <div class="main-grid">
+    <!-- CALCULATOR SECTION -->
+    <section class="calc-card" id="calculatorContainer" aria-label="Multi-Calculator">
+      <div class="calc-header">
+        <i id="calcTypeIcon" class="fas fa-calculator"></i>
+        <h2 id="calcTypeTitle">Standard <small>v2.0</small></h2>
+      </div>
+      <div class="display">
+        <div class="expression" id="expressionDisplay"></div>
+        <div class="result" id="resultDisplay">0</div>
+      </div>
+      <div class="buttons" id="buttonContainer">
+        <!-- dynamic buttons -->
+      </div>
+    </section>
+
+    <!-- BLOG SECTION (10 posts) -->
+    <aside class="blog-section">
+      <h3><i class="fas fa-pen-fancy"></i> Calculation Insights</h3>
+      <div class="blog-list" id="blogList">
+        <!-- injected by js -->
+      </div>
+    </aside>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-copy">
+      &copy; 2026 ProCalcMaster — <span style="font-weight:400;">precision tools for sharp minds</span>
+    </div>
+    <div class="footer-links">
+      <a href="#"><i class="fas fa-cog" style="margin-right: 4px;"></i> API</a>
+      <a href="#"><i class="fas fa-file-alt"></i> Docs</a>
+      <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+      <div class="social-icons">
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  (function() {
+    // ===== BLOG POSTS (10) =====
+    const blogPosts = [
+      { title: "10 Hidden Features of ProCalc Master", tag: "tips", icon: "fa-lightbulb" },
+      { title: "How to Calculate Compound Interest Like a Pro", tag: "finance", icon: "fa-chart-line" },
+      { title: "Engineering Precision: Using Scientific Mode", tag: "engineering", icon: "fa-microchip" },
+      { title: "Mental Math Hacks for Daily Number Crunching", tag: "mental", icon: "fa-brain" },
+      { title: "Why Every Analyst Needs a Reliable Calculator", tag: "analytics", icon: "fa-chart-pie" },
+      { title: "From Basic to Advanced: Master the Functions", tag: "tutorial", icon: "fa-graduation-cap" },
+      { title: "Calculator Shortcuts That Save You Time", tag: "productivity", icon: "fa-clock" },
+      { title: "Understanding Floating Point in Financial Calcs", tag: "finance", icon: "fa-coins" },
+      { title: "Top 5 Mistakes to Avoid in Complex Equations", tag: "errors", icon: "fa-exclamation-triangle" },
+      { title: "Future of Calculation: AI & Smart Tools", tag: "future", icon: "fa-robot" }
+    ];
+
+    const blogListEl = document.getElementById('blogList');
+    blogPosts.forEach((post, idx) => {
+      const item = document.createElement('div');
+      item.className = 'blog-item';
+      item.innerHTML = `
+        <div class="blog-title">
+          <i class="fas ${post.icon}"></i>
+          ${post.title}
+        </div>
+        <div class="blog-meta">
+          <span class="blog-tag"><i class="far fa-tag"></i> ${post.tag}</span>
+          <span><i class="far fa-calendar-alt"></i> ${new Date(2026, 5, 30 - idx).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+        </div>
+      `;
+      blogListEl.appendChild(item);
+    });
+
+    // ===== CALCULATOR ENGINE =====
+    const displayExpr = document.getElementById('expressionDisplay');
+    const displayResult = document.getElementById('resultDisplay');
+    const buttonContainer = document.getElementById('buttonContainer');
+    const calcTypeIcon = document.getElementById('calcTypeIcon');
+    const calcTypeTitle = document.getElementById('calcTypeTitle');
+
+    let currentInput = '0';
+    let previousInput = '';
+    let operator = null;
+    let shouldResetScreen = false;
+    let expressionString = '';
+    let currentMode = 'standard'; // standard, scientific, ibm, financial, engineering
+
+    function updateDisplay() {
+      displayResult.textContent = currentInput || '0';
+      displayExpr.textContent = expressionString || '\u00A0';
+    }
+
+    function inputNumber(num) {
+      if (shouldResetScreen) {
+        currentInput = num;
+        shouldResetScreen = false;
+      } else {
+        if (currentInput === '0' && num !== '.') {
+          currentInput = num;
+        } else {
+          if (num === '.' && currentInput.includes('.')) return;
+          currentInput += num;
+        }
+      }
+      updateDisplay();
+    }
+
+    function inputOperator(op) {
+      const current = parseFloat(currentInput);
+      if (operator && !shouldResetScreen) {
+        const result = calculate(parseFloat(previousInput), current, operator);
+        currentInput = String(result);
+        expressionString = `${previousInput} ${operator} ${currentInput}`;
+        displayResult.textContent = currentInput;
+        operator = op;
+        previousInput = currentInput;
+        shouldResetScreen = true;
+        updateDisplay();
+        return;
+      }
+      if (previousInput && operator) {
+        const result = calculate(parseFloat(previousInput), current, operator);
+        currentInput = String(result);
+        displayResult.textContent = currentInput;
+      }
+      previousInput = currentInput;
+      operator = op;
+      expressionString = `${previousInput} ${operator}`;
+      shouldResetScreen = true;
+      updateDisplay();
+    }
+
+    function calculate(a, b, op) {
+      switch (op) {
+        case '+': return a + b;
+        case '-': return a - b;
+        case '×': return a * b;
+        case '÷': return b !== 0 ? a / b : 'Error';
+        default: return b;
+      }
+    }
+
+    function evaluate() {
+      if (!operator || shouldResetScreen) return;
+      const current = parseFloat(currentInput);
+      const prev = parseFloat(previousInput);
+      const result = calculate(prev, current, operator);
+      if (result === 'Error') {
+        currentInput = 'Error';
+        expressionString = '';
+        operator = null;
+        previousInput = '';
+        updateDisplay();
+        return;
+      }
+      const formatted = Number.isInteger(result) ? String(result) : String(parseFloat(result.toFixed(10)));
+      expressionString = `${previousInput} ${operator} ${currentInput} =`;
+      currentInput = formatted;
+      operator = null;
+      previousInput = '';
+      shouldResetScreen = true;
+      updateDisplay();
+    }
+
+    function clearAll() {
+      currentInput = '0';
+      previousInput = '';
+      operator = null;
+      expressionString = '';
+      shouldResetScreen = false;
+      updateDisplay();
+    }
+
+    function deleteLast() {
+      if (shouldResetScreen) return;
+      if (currentInput.length > 1) {
+        currentInput = currentInput.slice(0, -1);
+      } else {
+        currentInput = '0';
+      }
+      updateDisplay();
+    }
+
+    function percent() {
+      const num = parseFloat(currentInput);
+      if (isNaN(num)) return;
+      const result = num / 100;
+      currentInput = String(parseFloat(result.toFixed(10)));
+      updateDisplay();
+    }
+
+    // Scientific / extra functions
+    function applyUnary(fn) {
+      const num = parseFloat(currentInput);
+      if (isNaN(num)) return;
+      const result = fn(num);
+      currentInput = String(parseFloat(result.toFixed(10)));
+      shouldResetScreen = true;
+      updateDisplay();
+    }
+
+    function square() { applyUnary(x => x * x); }
+    function sqrt() { applyUnary(x => Math.sqrt(x)); }
+    function cube() { applyUnary(x => x * x * x); }
+    function sinFn() { applyUnary(x => Math.sin(x)); }
+    function cosFn() { applyUnary(x => Math.cos(x)); }
+    function tanFn() { applyUnary(x => Math.tan(x)); }
+    function logFn() { applyUnary(x => Math.log10(x)); }
+    function lnFn() { applyUnary(x => Math.log(x)); }
+    function factorialFn() {
+      const num = parseInt(currentInput);
+      if (isNaN(num) || num < 0) return;
+      let result = 1;
+      for (let i = 2; i <= num; i++) result *= i;
+      currentInput = String(result);
+      shouldResetScreen = true;
+      updateDisplay();
+    }
+    function expFn() { applyUnary(x => Math.exp(x)); }
+    function invFn() { applyUnary(x => 1/x); }
+    function piFn() { currentInput = String(Math.PI); shouldResetScreen = true; updateDisplay(); }
+
+    // ===== BUILD BUTTONS BASED ON MODE =====
+    function buildButtons(mode) {
+      buttonContainer.innerHTML = '';
+      const common = [
+        { label: 'C', action: clearAll, type: 'clear' },
+        { label: '⌫', action: deleteLast, type: 'clear' },
+        { label: '%', action: percent, type: 'operator' },
+        { label: '÷', action: () => inputOperator('÷'), type: 'operator' },
+        { label: '7', action: () => inputNumber('7') },
+        { label: '8', action: () => inputNumber('8') },
+        { label: '9', action: () => inputNumber('9') },
+        { label: '×', action: () => inputOperator('×'), type: 'operator' },
+        { label: '4', action: () => inputNumber('4') },
+        { label: '5', action: () => inputNumber('5') },
+        { label: '6', action: () => inputNumber('6') },
+        { label: '-', action: () => inputOperator('-'), type: 'operator' },
+        { label: '1', action: () => inputNumber('1') },
+        { label: '2', action: () => inputNumber('2') },
+        { label: '3', action: () => inputNumber('3') },
+        { label: '+', action: () => inputOperator('+'), type: 'operator' },
+        { label: '±', action: () => { if (currentInput !== '0' && currentInput !== 'Error') { currentInput = String(-parseFloat(currentInput)); updateDisplay(); } } },
+        { label: '0', action: () => inputNumber('0'), extra: 'btn-zero' },
+        { label: '.', action: () => inputNumber('.') },
+        { label: '=', action: evaluate, type: 'equal' },
+      ];
+
+      let extra = [];
+      if (mode === 'scientific') {
+        extra = [
+          { label: 'x²', action: square, type: 'sci' },
+          { label: '√', action: sqrt, type: 'sci' },
+          { label: 'x³', action: cube, type: 'sci' },
+          { label: 'sin', action: sinFn, type: 'sci' },
+          { label: 'cos', action: cosFn, type: 'sci' },
+          { label: 'tan', action: tanFn, type: 'sci' },
+          { label: 'log', action: logFn, type: 'sci' },
+          { label: 'ln', action: lnFn, type: 'sci' },
+          { label: 'n!', action: factorialFn, type: 'sci' },
+          { label: 'eˣ', action: expFn, type: 'sci' },
+          { label: '1/x', action: invFn, type: 'sci' },
+          { label: 'π', action: piFn, type: 'sci' },
+        ];
+      } else if (mode === 'ibm') {
+        extra = [
+          { label: 'AND', action: () => { applyUnary(x => x & 0xFF); }, type: 'sci' },
+          { label: 'OR', action: () => { applyUnary(x => x | 0xFF); }, type: 'sci' },
+          { label: 'XOR', action: () => { applyUnary(x => x ^ 0xFF); }, type: 'sci' },
+          { label: 'NOT', action: () => { applyUnary(x => ~x); }, type: 'sci' },
+          { label: '<<', action: () => { applyUnary(x => x << 1); }, type: 'sci' },
+          { label: '>>', action: () => { applyUnary(x => x >> 1); }, type: 'sci' },
+          { label: 'HEX', action: () => { currentInput = '0x' + parseInt(currentInput).toString(16).toUpperCase(); shouldResetScreen = true; updateDisplay(); }, type: 'sci' },
+          { label: 'BIN', action: () => { currentInput = '0b' + parseInt(currentInput).toString(2); shouldResetScreen = true; updateDisplay(); }, type: 'sci' },
+        ];
+      } else if (mode === 'financial') {
+        extra = [
+          { label: 'PV', action: () => { applyUnary(x => x / (1 + 0.05)); }, type: 'sci' },
+          { label: 'FV', action: () => { applyUnary(x => x * (1 + 0.05)); }, type: 'sci' },
+          { label: 'PMT', action: () => { applyUnary(x => x * 0.05 / (1 - Math.pow(1.05, -10))); }, type: 'sci' },
+          { label: 'IRR', action: () => { applyUnary(x => x * 0.12); }, type: 'sci' },
+          { label: 'NPV', action: () => { applyUnary(x => x / 1.1); }, type: 'sci' },
+          { label: 'ROI', action: () => { applyUnary(x => x * 0.2); }, type: 'sci' },
+        ];
+      } else if (mode === 'engineering') {
+        extra = [
+          { label: 'sinh', action: () => { applyUnary(x => Math.sinh(x)); }, type: 'sci' },
+          { label: 'cosh', action: () => { applyUnary(x => Math.cosh(x)); }, type: 'sci' },
+          { label: 'tanh', action: () => { applyUnary(x => Math.tanh(x)); }, type: 'sci' },
+          { label: '√x', action: sqrt, type: 'sci' },
+          { label: 'x²', action: square, type: 'sci' },
+          { label: 'x³', action: cube, type: 'sci' },
+          { label: 'log₂', action: () => { applyUnary(x => Math.log2(x)); }, type: 'sci' },
+          { label: 'eˣ', action: expFn, type: 'sci' },
+        ];
+      }
+
+      const allButtons = [...common];
+      // insert extra after first row (after C, ⌫, %, ÷)
+      if (extra.length) {
+        // place extra before digits
+        const insertIndex = 4; // after first 4 items
+        allButtons.splice(insertIndex, 0, ...extra);
+      }
+
+      allButtons.forEach(def => {
+        const btn = document.createElement('button');
+        btn.className = 'btn';
+        if (def.type === 'operator') btn.classList.add('btn-operator');
+        if (def.type === 'equal') btn.classList.add('btn-equal');
+        if (def.type === 'clear') btn.classList.add('btn-clear');
+        if (def.type === 'sci') btn.classList.add('btn-sci');
+        if (def.extra) btn.classList.add(def.extra);
+        btn.textContent = def.label;
+        btn.addEventListener('click', def.action);
+        buttonContainer.appendChild(btn);
+      });
+    }
+
+    // ===== SWITCH MODE =====
+    function switchMode(mode) {
+      currentMode = mode;
+      clearAll();
+      const modeMap = {
+        standard: { icon: 'fa-calculator', title: 'Standard' },
+        scientific: { icon: 'fa-flask', title: 'Scientific' },
+        ibm: { icon: 'fa-database', title: 'IBM‑Style' },
+        financial: { icon: 'fa-coins', title: 'Financial' },
+        engineering: { icon: 'fa-microchip', title: 'Engineering' }
+      };
+      const info = modeMap[mode] || modeMap.standard;
+      calcTypeIcon.className = `fas ${info.icon}`;
+      calcTypeTitle.innerHTML = `${info.title} <small>v2.0</small>`;
+      buildButtons(mode);
+      // update nav active
+      document.querySelectorAll('.calc-nav-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.calc === mode);
+      });
+    }
+
+    // ===== NAV EVENTS =====
+    document.querySelectorAll('.calc-nav-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const mode = this.dataset.calc;
+        switchMode(mode);
+      });
+    });
+
+    // ===== KEYBOARD SUPPORT =====
+    document.addEventListener('keydown', (e) => {
+      const key = e.key;
+      if (key >= '0' && key <= '9') inputNumber(key);
+      else if (key === '.') inputNumber('.');
+      else if (key === '+') inputOperator('+');
+      else if (key === '-') inputOperator('-');
+      else if (key === '*') inputOperator('×');
+      else if (key === '/') { e.preventDefault(); inputOperator('÷'); }
+      else if (key === 'Enter' || key === '=') { e.preventDefault(); evaluate(); }
+      else if (key === 'Backspace') deleteLast();
+      else if (key === 'Escape' || key === 'c' || key === 'C') clearAll();
+      else if (key === '%') percent();
+    });
+
+    // init standard
+    switchMode('standard');
+  })();
+</script>
+</body>
+</html>
